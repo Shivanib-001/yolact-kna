@@ -59,4 +59,43 @@ Each feature location generates multiple anchor boxes of different aspect ratios
 - **Export YOLACT model to ONNX**
 - **Build a TensorRT engine from ONNX**
 - **Run inference using GPU & Cuda**
+## Export from onnx to Tensorrt engine ##
+```
+trtexec --onnx=weights/trained_model.onnx --saveEngine=trained_model.engine
+```
+## Export from onnx to Tensorrt engine FP16 ##
+```
+#convert to half precision model
+trtexec --onnx=weights/trained_model.onnx --saveEngine=trained_model.engine --fp16
+```
+## Inference with script ##
+Run the following command to run the inference on video
+> `Python3 trt_infer.py`
+
+Inside trt_infer.py, set path for model and video to run inference.
+> `trt_infer = TRTInference("model/kna_trunk.engine")`
+>
+> `cap = cv2.VideoCapture("../test_images/test_video3.mp4")`
+
+You can also change model threshold values to tune the results as per the requirements
+```
+# Thresholds and limits for filtering and display
+SCORE_THRESH = 0.1        
+IOU_THRESH = 0.3         
+MASK_THRESH = 0.5      
+top_k = 10  
+```
+## References ##
+**Yolact Paper:** <https://arxiv.org/abs/1904.02689>
+
+**Yolact Code:** <https://github.com/dbolya/yolact>
+
+**Yolact ONNX:** <https://github.com/luiszeni/yolact_onnx>
+
+**Installing TensorRT:** <https://docs.nvidia.com/deeplearning/tensorrt/latest/installing-tensorrt/installing.html>
+
+**NVIDIA - Inference with onnx:** <https://docs.nvidia.com/deeplearning/tensorrt/latest/getting-started/quick-start-guide.html>
+
+**Semantic Segmentation with tensort and onnx:** <https://github.com/NVIDIA/TensorRT/blob/main/quickstart/SemanticSegmentation/tutorial-runtime.ipynb>
+
 

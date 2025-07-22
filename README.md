@@ -8,6 +8,7 @@ This allows fast instance segmentation by performing one forward pass and combin
 ## Outputs from YOLACT
 A typical YOLACT model outputs the following tensors:
 | **Output** | **Description** |
+| --- | --- |
 | `proto` | Prototype masks: (mask_h, mask_w, mask_dim)
 | `loc`   | Bounding box offsets relative to priors
 | `mask`  | Linear mask coefficients (num_dets, mask_dim)
